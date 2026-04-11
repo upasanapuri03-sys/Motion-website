@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXIS — Motion & Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-logo">AXIS</div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Start a Project</button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Motion Studio — Est. 2024</p>
+      <h1 class="hero-headline">
+        <span class="line-wrap"><span class="word" data-word="NOT">NOT</span></span>
+        <span class="line-wrap"><span class="word accent-word" data-word="YOUR">YOUR</span></span>
+        <span class="line-wrap"><span class="word" data-word="AVERAGE">AVERAGE</span></span>
+        <span class="line-wrap"><span class="word outline-word" data-word="STUDIO.">STUDIO.</span></span>
+      </h1>
+      <div class="hero-sub">
+        <p>We craft digital experiences that move, breathe,<br>and leave a mark.</p>
+        <div class="hero-scroll-hint">
+          <span class="scroll-line"></span>
+          <span>Scroll</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <svg viewBox="0 0 100 100" class="badge-ring">
+        <path id="badge-text-path" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/>
+        <text>
+          <textPath href="#badge-text-path" startOffset="0%">MOTION · DESIGN · DIRECTION · FILM ·&nbsp;</textPath>
+        </text>
+      </svg>
+      <span class="badge-arrow">↗</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-track" aria-hidden="true">
+    <div class="marquee-inner">
+      <span>Brand Identity</span><span class="dot">·</span>
+      <span>Motion Design</span><span class="dot">·</span>
+      <span>3D Direction</span><span class="dot">·</span>
+      <span>Film & Content</span><span class="dot">·</span>
+      <span>Web Experiences</span><span class="dot">·</span>
+      <span>Brand Identity</span><span class="dot">·</span>
+      <span>Motion Design</span><span class="dot">·</span>
+      <span>3D Direction</span><span class="dot">·</span>
+      <span>Film & Content</span><span class="dot">·</span>
+      <span>Web Experiences</span><span class="dot">·</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="about-grid">
+      <div class="about-left reveal-left">
+        <span class="section-label">/ 01 — About</span>
+        <h2 class="section-heading">We Make<br><em>Things Move</em></h2>
+      </div>
+      <div class="about-right reveal-right">
+        <p class="about-body">AXIS is an independent motion and design studio obsessed with craft. We push visual boundaries—merging sharp editorial aesthetics with kinetic storytelling to create work that feels as good as it looks.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num" data-target="120">0</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-target="48">0</span>
+            <span class="stat-label">Brands Elevated</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-target="7">0</span>
+            <span class="stat-label">Years of Edge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK GRID -->
+  <section id="work" class="section">
+    <div class="work-header">
+      <span class="section-label reveal-up">/ 02 — Selected Work</span>
+      <h2 class="section-heading reveal-up">Recent<br>Projects</h2>
+    </div>
+    <div class="work-grid">
+
+      <article class="work-card card-large reveal-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--hue: #C4421A"></div>
+          <div class="card-noise"></div>
+          <div class="card-content">
+            <span class="card-num">01</span>
+            <div class="card-info">
+              <h3>COLLIDER</h3>
+              <p>Brand Identity + Motion</p>
+            </div>
+            <span class="card-tag">2024</span>
+          </div>
+          <div class="card-reveal">
+            <p>A mood-first beverage brand built around emotional contrast and bold kinetics.</p>
+            <a href="#" class="card-link">View Project ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card card-tall reveal-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--hue: #8B3A1E"></div>
+          <div class="card-noise"></div>
+          <div class="card-content">
+            <span class="card-num">02</span>
+            <div class="card-info">
+              <h3>AURORA</h3>
+              <p>Web Experience</p>
+            </div>
+            <span class="card-tag">2024</span>
+          </div>
+          <div class="card-reveal">
+            <p>Immersive 3D product showcase for a luxury skincare launch.</p>
+            <a href="#" class="card-link">View Project ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card card-small reveal-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--hue: #2A1A0E"></div>
+          <div class="card-noise"></div>
+          <div class="card-content">
+            <span class="card-num">03</span>
+            <div class="card-info">
+              <h3>EPOCH</h3>
+              <p>Film Direction</p>
+            </div>
+            <span class="card-tag">2023</span>
+          </div>
+          <div class="card-reveal">
+            <p>A short-form brand film for an architectural practice.</p>
+            <a href="#" class="card-link">View Project ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card card-small reveal-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--hue: #5C2E0A"></div>
+          <div class="card-noise"></div>
+          <div class="card-content">
+            <span class="card-num">04</span>
+            <div class="card-info">
+              <h3>VANTA</h3>
+              <p>Motion + 3D</p>
+            </div>
+            <span class="card-tag">2023</span>
+          </div>
+          <div class="card-reveal">
+            <p>Generative visual system for a creative technology festival.</p>
+            <a href="#" class="card-link">View Project ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card card-wide reveal-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--hue: #1A0A05"></div>
+          <div class="card-noise"></div>
+          <div class="card-content">
+            <span class="card-num">05</span>
+            <div class="card-info">
+              <h3>THE ART OF LIFE</h3>
+              <p>Editorial + Photography Direction</p>
+            </div>
+            <span class="card-tag">2023</span>
+          </div>
+          <div class="card-reveal">
+            <p>A visual identity and publication system rooted in quiet luxury.</p>
+            <a href="#" class="card-link">View Project ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="services-header">
+      <span class="section-label reveal-up">/ 03 — Services</span>
+    </div>
+    <div class="services-list">
+      <div class="service-item reveal-service">
+        <span class="service-num">01</span>
+        <h3 class="service-name">Motion Design</h3>
+        <p class="service-desc">Titles, brand films, product reveals, UI motion</p>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service-item reveal-service">
+        <span class="service-num">02</span>
+        <h3 class="service-name">Brand Identity</h3>
+        <p class="service-desc">Visual systems, typography, art direction</p>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service-item reveal-service">
+        <span class="service-num">03</span>
+        <h3 class="service-name">Web Experiences</h3>
+        <p class="service-desc">Interactive, immersive, animated digital builds</p>
+        <span class="service-arrow">↗</span>
+      </div>
+      <div class="service-item reveal-service">
+        <span class="service-num">04</span>
+        <h3 class="service-name">3D & CGI</h3>
+        <p class="service-desc">Product visualization, abstract environments, compositing</p>
+        <span class="service-arrow">↗</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="section statement-section">
+    <div class="statement-inner">
+      <p class="statement-text reveal-statement">
+        "Every pixel is a <em>decision</em>.<br>Every frame, an <em>intention</em>."
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact-section">
+    <div class="contact-inner">
+      <span class="section-label reveal-up">/ 04 — Let's Talk</span>
+      <h2 class="contact-heading reveal-up">Start Something<br><em>Bold</em></h2>
+      <a href="mailto:hello@axis.studio" class="contact-cta reveal-up">hello@axis.studio ↗</a>
+    </div>
+    <div class="contact-bg-text" aria-hidden="true">AXIS</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">AXIS</span>
+      <span class="footer-copy">© 2024 AXIS Studio. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
