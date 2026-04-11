@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOTION — Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">MOTION</a>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-cta">Let's Talk</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Creative Studio — Est. 2024</p>
+      <h1 class="hero-headline">
+        <span class="line" data-text="WE MAKE">WE MAKE</span>
+        <span class="line accent" data-text="MOTION">MOTION</span>
+        <span class="line" data-text="MATTER">MATTER</span>
+      </h1>
+      <p class="hero-sub">Crafting digital experiences that move, breathe, and resonate.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">View Work</a>
+        <a href="#about" class="btn-ghost">Our Story ↓</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>ANIMATION</span><span class="dot">◆</span>
+      <span>INTERACTION</span><span class="dot">◆</span>
+      <span>MOTION DESIGN</span><span class="dot">◆</span>
+      <span>3D VISUALS</span><span class="dot">◆</span>
+      <span>BRAND IDENTITY</span><span class="dot">◆</span>
+      <span>WEB EXPERIENCE</span><span class="dot">◆</span>
+      <span>ANIMATION</span><span class="dot">◆</span>
+      <span>INTERACTION</span><span class="dot">◆</span>
+      <span>MOTION DESIGN</span><span class="dot">◆</span>
+      <span>3D VISUALS</span><span class="dot">◆</span>
+      <span>BRAND IDENTITY</span><span class="dot">◆</span>
+      <span>WEB EXPERIENCE</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-header">
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title reveal-title">PROJECTS</h2>
+    </div>
+    <div class="work-grid">
+      <div class="work-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--clr:#7B2FBE"></div>
+          <div class="card-overlay"></div>
+          <div class="card-body">
+            <span class="card-num">01</span>
+            <h3 class="card-title">Nebula UI</h3>
+            <p class="card-cat">Interface / 3D</p>
+          </div>
+          <div class="card-reveal">
+            <p>An immersive space-themed dashboard with real-time data visualization and particle systems.</p>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--clr:#00FFB2"></div>
+          <div class="card-overlay"></div>
+          <div class="card-body">
+            <span class="card-num">02</span>
+            <h3 class="card-title">Pulse Brand</h3>
+            <p class="card-cat">Identity / Motion</p>
+          </div>
+          <div class="card-reveal">
+            <p>Dynamic brand system for a fintech startup — living logos, animated type, kinetic ads.</p>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--clr:#FF2D55"></div>
+          <div class="card-overlay"></div>
+          <div class="card-body">
+            <span class="card-num">03</span>
+            <h3 class="card-title">Axiom Film</h3>
+            <p class="card-cat">Film / VFX</p>
+          </div>
+          <div class="card-reveal">
+            <p>Title sequence and visual effects for an award-winning short film screened at Sundance.</p>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--clr:#FFB800"></div>
+          <div class="card-overlay"></div>
+          <div class="card-body">
+            <span class="card-num">04</span>
+            <h3 class="card-title">Synthwave App</h3>
+            <p class="card-cat">App / Audio</p>
+          </div>
+          <div class="card-reveal">
+            <p>Music visualization app with real-time FFT analysis driving reactive 3D environments.</p>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--clr:#00D4FF"></div>
+          <div class="card-overlay"></div>
+          <div class="card-body">
+            <span class="card-num">05</span>
+            <h3 class="card-title">Zero Gravity</h3>
+            <p class="card-cat">Web / 3D</p>
+          </div>
+          <div class="card-reveal">
+            <p>Zero-gravity product showcase with physics-based interactions and procedural animation.</p>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-card" data-tilt>
+        <div class="card-inner">
+          <div class="card-bg" style="--clr:#FF6B35"></div>
+          <div class="card-overlay"></div>
+          <div class="card-body">
+            <span class="card-num">06</span>
+            <h3 class="card-title">Echo System</h3>
+            <p class="card-cat">Installation / AR</p>
+          </div>
+          <div class="card-reveal">
+            <p>Interactive AR installation merging physical and digital spaces for a museum exhibition.</p>
+            <a href="#" class="card-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="section-label">About Us</p>
+        <h2 class="about-title reveal-title">WE PUSH<br/><em>PIXELS</em><br/>FORWARD</h2>
+      </div>
+      <div class="about-right">
+        <p class="about-text fade-up">We are a collective of motion designers, developers, and creative technologists obsessed with the intersection of art and code.</p>
+        <p class="about-text fade-up">Every project starts with a question: <strong>what should this feel like?</strong> We answer it with animation, interaction, and relentless iteration.</p>
+        <div class="stats-row">
+          <div class="stat fade-up">
+            <span class="stat-num">120+</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat fade-up">
+            <span class="stat-num">40+</span>
+            <span class="stat-label">Global Clients</span>
+          </div>
+          <div class="stat fade-up">
+            <span class="stat-num">8</span>
+            <span class="stat-label">Awards Won</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header">
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title reveal-title">SERVICES</h2>
+    </div>
+    <div class="services-list">
+      <div class="service-item fade-up">
+        <span class="service-num">01</span>
+        <div class="service-body">
+          <h3>Motion Design</h3>
+          <p>Broadcast graphics, animated identities, title sequences, and explainer films.</p>
+        </div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-item fade-up">
+        <span class="service-num">02</span>
+        <div class="service-body">
+          <h3>Creative Development</h3>
+          <p>WebGL, Three.js, GSAP — immersive web experiences built from scratch.</p>
+        </div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-item fade-up">
+        <span class="service-num">03</span>
+        <div class="service-body">
+          <h3>Brand in Motion</h3>
+          <p>Living design systems: animated logos, motion guidelines, social templates.</p>
+        </div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-item fade-up">
+        <span class="service-num">04</span>
+        <div class="service-body">
+          <h3>Interactive Installations</h3>
+          <p>Physical-digital experiences for events, galleries, and retail environments.</p>
+        </div>
+        <span class="service-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="contact-headline reveal-title">START A<br/><em>PROJECT</em></h2>
+      <p class="contact-sub fade-up">Got a wild idea? We're in. Drop us a line and let's build something unforgettable.</p>
+      <a href="mailto:hello@motion.studio" class="contact-email fade-up">hello@motion.studio</a>
+      <div class="contact-socials fade-up">
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+        <a href="#">Dribbble</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <div class="contact-bg-text">MOTION</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2024 MOTION Studio</span>
+    <span>All rights reserved</span>
+    <span class="footer-mono">Crafted with GSAP + Canvas</span>
+  </footer>
+
+  <!-- CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
