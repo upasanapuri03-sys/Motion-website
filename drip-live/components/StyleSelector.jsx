@@ -137,12 +137,22 @@ export default function StyleSelector() {
         ease: 'power3.out',
         scrollTrigger: { trigger: sectionRef.current, start: 'top 78%' },
       }
-      gsap.fromTo(leftRef.current,
-        { x: '-100%', opacity: 0 }, { x: 0, opacity: 1, ...shared }
-      )
-      gsap.fromTo(rightRef.current,
-        { x: '100%',  opacity: 0 }, { x: 0, opacity: 1, ...shared }
-      )
+      if (window.innerWidth >= 768) {
+        // Desktop: slide in from sides
+        gsap.fromTo(leftRef.current,
+          { x: '-100%', opacity: 0 }, { x: 0, opacity: 1, ...shared }
+        )
+        gsap.fromTo(rightRef.current,
+          { x: '100%',  opacity: 0 }, { x: 0, opacity: 1, ...shared }
+        )
+      } else {
+        // Mobile: fade up both panels
+        gsap.fromTo(
+          [leftRef.current, rightRef.current],
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.15, ...shared }
+        )
+      }
     })
     return () => ctx.revert()
   }, [])
@@ -162,18 +172,17 @@ export default function StyleSelector() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-screen overflow-hidden"
+      className="relative flex flex-col md:flex-row min-h-screen md:h-screen overflow-hidden"
       style={{ background: '#111' }}
     >
       {/* ── LEFT PANEL ────────────────────────────────────────────────────── */}
       <div
         ref={leftRef}
-        className="relative flex flex-col justify-center gap-8 px-12 py-10 overflow-y-auto"
-        style={{ width: '48%', borderRight: '1px solid rgba(255,255,255,0.06)' }}
+        className="relative flex flex-col justify-center gap-8 px-6 md:px-12 py-10 overflow-y-auto w-full md:w-[48%] border-b border-white/[0.06] md:border-b-0 md:border-r md:border-r-white/[0.06]"
       >
         <h2
           className="font-heading text-white leading-none"
-          style={{ fontSize: '4vw' }}
+          style={{ fontSize: 'clamp(28px, 4vw, 72px)' }}
         >
           BUILD YOUR FIT
         </h2>
@@ -319,13 +328,12 @@ export default function StyleSelector() {
       {/* ── RIGHT PANEL ───────────────────────────────────────────────────── */}
       <div
         ref={rightRef}
-        className="relative flex items-center justify-center"
-        style={{ width: '52%' }}
+        className="relative flex items-center justify-center w-full md:w-[52%] py-10 md:py-0"
       >
         {/* Model container — 2:3 portrait aspect matching a fashion silhouette */}
         <div
           className="relative"
-          style={{ height: '82vh', aspectRatio: '2 / 3' }}
+          style={{ height: 'clamp(300px, 60vw, 82vh)', aspectRatio: '2 / 3' }}
         >
           {/* Base silhouette — swap for:
               <img src="/models/base.png" className="absolute inset-0 w-full h-full object-contain" />

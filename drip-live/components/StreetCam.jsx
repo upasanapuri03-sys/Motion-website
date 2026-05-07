@@ -260,12 +260,8 @@ export default function StreetCam() {
       {/* ── 3×2 image grid ───────────────────────────────────────────────── */}
       <div
         ref={gridRef}
-        className="px-6 pb-10"
-        style={{
-          display:             'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap:                 '2px',
-        }}
+        className="px-6 pb-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+        style={{ gap: '2px' }}
       >
         {CELLS.map((cell) => (
           <StreetCell

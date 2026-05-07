@@ -58,7 +58,7 @@ export default function Lookbook() {
   const wrapperRef  = useRef(null)
   const trackRef    = useRef(null)
   const progressRef = useRef(null)
-  const bgRefs      = useRef([])   // one per card — for parallax
+  const bgRefs      = useRef([])
 
   useEffect(() => {
     const wrapper  = wrapperRef.current
@@ -66,69 +66,80 @@ export default function Lookbook() {
     const progress = progressRef.current
     if (!wrapper || !track || !progress) return
 
-    // Total scroll distance = (cards - 1) * viewport width
-    const scrollDist = () => (CARD_COUNT - 1) * window.innerWidth
+    const isMobile = window.innerWidth < 768
 
-    // ── Float animation on every [data-float] tag ─────────────────────
+    // Float tags on all screen sizes
     const tags = Array.from(wrapper.querySelectorAll('[data-float]'))
-    tags.forEach((el, i) => {
-      gsap.to(el, {
-        y: -8,
-        duration: 2 + (i % 3) * 0.35,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: i * 0.18,
+
+    if (isMobile) {
+      tags.forEach((el, i) => {
+        gsap.to(el, {
+          y: -6,
+          duration: 2 + (i % 3) * 0.35,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: i * 0.18,
+        })
       })
-    })
-
-    // ── Horizontal scroll ─────────────────────────────────────────────
-    const tween = gsap.to(track, {
-      x: () => -scrollDist(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: wrapper,
-        start: 'top top',
-        end: () => `+=${scrollDist()}`,
-        pin: true,
-        scrub: 1.2,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,  // recalculates end on resize
-        onUpdate: (self) => {
-          // ── Progress bar ──────────────────────────────────────────
-          progress.style.transform = `scaleX(${self.progress})`
-
-          // ── Parallax: shift each bg layer opposite to track motion ─
-          // bg layer is 110% wide (5% bleed each side), so ±5% of vw
-          // is the safe parallax budget without revealing edges.
-          const trackX = -self.progress * scrollDist()
-          bgRefs.current.forEach((bg, i) => {
-            if (!bg) return
-            const cardLeft = i * window.innerWidth + trackX
-            // shift bg opposite direction: 5% of how far card is off-center
-            bg.style.transform = `translateX(${-cardLeft * 0.05}px)`
-          })
-        },
-      },
-    })
-
-    ScrollTrigger.refresh()
-
-    return () => {
-      tween.scrollTrigger?.kill()
-      tween.kill()
-      tags.forEach((el) => gsap.killTweensOf(el))
+      return () => tags.forEach(el => gsap.killTweensOf(el))
     }
+
+    // ── Desktop: horizontal scroll ────────────────────────────────────
+    track.style.width = `${CARD_COUNT * 100}vw`
+
+    const ctx = gsap.context(() => {
+      tags.forEach((el, i) => {
+        gsap.to(el, {
+          y: -8,
+          duration: 2 + (i % 3) * 0.35,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: i * 0.18,
+        })
+      })
+
+      const scrollDist = () => (CARD_COUNT - 1) * window.innerWidth
+
+      gsap.to(track, {
+        x: () => -scrollDist(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: wrapper,
+          start: 'top top',
+          end: () => `+=${scrollDist()}`,
+          pin: true,
+          scrub: 1.2,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            progress.style.transform = `scaleX(${self.progress})`
+
+            const trackX = -self.progress * scrollDist()
+            bgRefs.current.forEach((bg, i) => {
+              if (!bg) return
+              const cardLeft = i * window.innerWidth + trackX
+              bg.style.transform = `translateX(${-cardLeft * 0.05}px)`
+            })
+          },
+        },
+      })
+
+      ScrollTrigger.refresh()
+    })
+
+    return () => ctx.revert()
   }, [])
 
   return (
     <section
       ref={wrapperRef}
-      className="relative h-screen overflow-hidden bg-[#0a0a0a]"
+      className="relative overflow-hidden bg-[#0a0a0a]"
     >
-      {/* ── Scroll progress bar ──────────────────────────────────────────── */}
+      {/* Progress bar — desktop only */}
       <div
-        className="absolute top-0 left-0 right-0 z-30 h-[2px]"
+        className="hidden md:block absolute top-0 left-0 right-0 z-30 h-[2px]"
         style={{ background: 'rgba(255,255,255,0.07)' }}
       >
         <div
@@ -138,22 +149,20 @@ export default function Lookbook() {
         />
       </div>
 
-      {/* ── Horizontal track ─────────────────────────────────────────────── */}
+      {/* Horizontal track — flex-col on mobile, flex-row on desktop */}
       <div
         ref={trackRef}
-        className="flex h-full will-change-transform"
-        style={{ width: `${CARD_COUNT * 100}vw` }}
+        className="flex flex-col md:flex-row md:h-screen will-change-transform"
       >
         {LOOKS.map((look, i) => (
           <div
             key={look.num}
-            className="relative flex-none w-screen h-screen overflow-hidden group"
+            className="relative flex-none w-full md:w-screen h-[75vw] md:h-screen overflow-hidden group"
           >
-            {/* Background — solid color fallback; backgroundImage shows when
-                texture files are added to /public/textures/             */}
+            {/* Background */}
             <div
               ref={(el) => { bgRefs.current[i] = el }}
-              className="absolute will-change-transform"
+              className="absolute md:will-change-transform"
               style={{
                 inset: '-5%',
                 width: '110%',
@@ -168,29 +177,24 @@ export default function Lookbook() {
             {/* Legibility overlay */}
             <div className="absolute inset-0 bg-black/35 z-[1]" />
 
-            {/* ── Decorative look number ──────────────────────────────────── */}
+            {/* Decorative look number */}
             <span
-              className="absolute top-6 left-8 font-heading text-white z-[2] select-none pointer-events-none leading-none"
-              style={{ fontSize: '20vw', opacity: 0.08 }}
+              className="absolute top-4 left-6 md:top-6 md:left-8 font-heading text-white z-[2] select-none pointer-events-none leading-none"
+              style={{ fontSize: 'clamp(72px, 18vw, 20vw)', opacity: 0.08 }}
               aria-hidden="true"
             >
               {look.num}
             </span>
 
-            {/* ── Model placeholder (bottom-right, scales on hover) ───────── */}
-            {/* Replace the inner <div> with <img src={look.modelImg} ... />
-                when model PNGs are ready — the group-hover scale stays the same */}
+            {/* Model placeholder */}
             <div
               className="absolute bottom-0 z-[3]"
               style={{
                 right: '5vw',
                 height: '60vh',
                 aspectRatio: '2/3',
-                transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                 transformOrigin: 'bottom center',
               }}
-              // group-hover via JS because aspectRatio makes Tailwind's
-              // group-hover:scale-105 apply to dimensions, not transform
             >
               <div
                 className="w-full h-full group-hover:scale-105 transition-transform duration-[400ms]"
@@ -201,11 +205,11 @@ export default function Lookbook() {
               />
             </div>
 
-            {/* ── Bottom-left: look name + floating tags ──────────────────── */}
-            <div className="absolute bottom-10 left-8 z-[4] flex flex-col gap-5">
+            {/* Bottom-left: look name + floating tags */}
+            <div className="absolute bottom-8 left-6 md:bottom-10 md:left-8 z-[4] flex flex-col gap-4 md:gap-5">
               <h3
                 className="font-heading text-white leading-none"
-                style={{ fontSize: 'clamp(24px, 5vw, 88px)' }}
+                style={{ fontSize: 'clamp(20px, 4.5vw, 88px)' }}
               >
                 {look.name}
               </h3>
@@ -216,14 +220,13 @@ export default function Lookbook() {
                     key={t}
                     data-float
                     className="font-mono text-[#C8FF00] border border-[#C8FF00]/35 px-2 py-[5px] leading-none"
-                    style={{ fontSize: 11, letterSpacing: '1.5px' }}
+                    style={{ fontSize: 10, letterSpacing: '1.5px' }}
                   >
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
-
           </div>
         ))}
       </div>

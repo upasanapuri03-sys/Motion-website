@@ -128,7 +128,7 @@ export default function Hero() {
         <h1
           ref={headingRef}
           className="font-heading text-white leading-[0.9]"
-          style={{ fontSize: 'clamp(64px, 18vw, 320px)', opacity: 0 }}
+          style={{ fontSize: 'clamp(52px, 15vw, 320px)', opacity: 0 }}
         >
           SS26
         </h1>

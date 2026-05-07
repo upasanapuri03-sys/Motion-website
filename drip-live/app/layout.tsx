@@ -19,8 +19,19 @@ const spaceMono = Space_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Drip Live',
-  description: 'Fashion forward.',
+  title: 'DRIP.LIVE | SS26',
+  description:
+    'Next-generation fashion editorial. Raw, unfiltered street culture. Drop 001 launching soon.',
+  openGraph: {
+    title:       'DRIP.LIVE | SS26',
+    description: 'Next-generation fashion editorial. Raw, unfiltered street culture.',
+    type:        'website',
+  },
+  twitter: {
+    card:        'summary_large_image',
+    title:       'DRIP.LIVE | SS26',
+    description: 'Next-generation fashion editorial. Raw, unfiltered street culture.',
+  },
 }
 
 export default function RootLayout({
