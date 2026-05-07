@@ -46,18 +46,3 @@ h6 {
 * {
   cursor: none;
 }
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 16px;
-  height: 16px;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  will-change: transform;
-  /* transform is driven by JS lerp — no CSS transition here */
-}

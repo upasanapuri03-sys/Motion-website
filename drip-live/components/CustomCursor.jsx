@@ -5,8 +5,8 @@ import { useEffect, useRef } from 'react'
 const TRAIL_COLORS = ['#C8FF00', '#FF1E1E']
 
 export default function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement>(null)
-  const followerRef = useRef<HTMLDivElement>(null)
+  const dotRef = useRef(null)
+  const followerRef = useRef(null)
 
   useEffect(() => {
     const dot = dotRef.current
@@ -15,25 +15,27 @@ export default function CustomCursor() {
 
     let mouseX = 0
     let mouseY = 0
-    let fx = 0
-    let fy = 0
-    let fSize = 40
+    let fx = 0         // follower x (lerped)
+    let fy = 0         // follower y (lerped)
+    let fSize = 40     // follower diameter (lerped separately for smooth resize)
     let targetSize = 40
     let isHovering = false
-    let raf: number
+    let raf
     let trailColorIdx = 0
 
-    const onMouseMove = (e: MouseEvent) => {
+    // ── Snap the small dot to the exact cursor position ──────────────────
+    const onMouseMove = (e) => {
       mouseX = e.clientX
       mouseY = e.clientY
       dot.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`
     }
 
-    const isInteractive = (el: Element | null): boolean =>
-      !!(el?.closest('a') || el?.closest('button') || el?.closest('.hoverable'))
+    // ── Hover detection ───────────────────────────────────────────────────
+    const isInteractive = (el) =>
+      el.closest('a') || el.closest('button') || el.closest('.hoverable')
 
-    const onMouseOver = (e: MouseEvent) => {
-      if (!isHovering && isInteractive(e.target as Element)) {
+    const onMouseOver = (e) => {
+      if (!isHovering && isInteractive(e.target)) {
         isHovering = true
         targetSize = 80
         follower.style.background = 'rgba(200, 255, 0, 0.30)'
@@ -41,8 +43,8 @@ export default function CustomCursor() {
       }
     }
 
-    const onMouseOut = (e: MouseEvent) => {
-      if (isHovering && isInteractive(e.target as Element)) {
+    const onMouseOut = (e) => {
+      if (isHovering && isInteractive(e.target)) {
         isHovering = false
         targetSize = 40
         follower.style.background = 'transparent'
@@ -50,9 +52,11 @@ export default function CustomCursor() {
       }
     }
 
+    // ── Fading colour trail ───────────────────────────────────────────────
     const dropTrailDot = () => {
       const color = TRAIL_COLORS[trailColorIdx % 2]
       trailColorIdx++
+
       const el = document.createElement('div')
       el.style.cssText = `
         position: fixed;
@@ -69,17 +73,23 @@ export default function CustomCursor() {
         transition: opacity 600ms ease-out;
       `
       document.body.appendChild(el)
-      // Two nested rAFs ensure the browser paints once before the fade begins
-      requestAnimationFrame(() => requestAnimationFrame(() => { el.style.opacity = '0' }))
+
+      // Two nested rAFs guarantee the browser has painted once before we
+      // flip opacity so the CSS transition actually fires.
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.opacity = '0'
+      }))
+
       setTimeout(() => el.remove(), 660)
     }
 
     const trailTimer = setInterval(dropTrailDot, 80)
 
+    // ── Lerp loop ─────────────────────────────────────────────────────────
     const animate = () => {
       fx += (mouseX - fx) * 0.08
       fy += (mouseY - fy) * 0.08
-      fSize += (targetSize - fSize) * 0.15
+      fSize += (targetSize - fSize) * 0.15   // separate lerp for size
 
       follower.style.width = `${fSize}px`
       follower.style.height = `${fSize}px`
@@ -104,7 +114,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* 12px dot — snaps to cursor with no lag */}
+      {/* 12px dot — tracks cursor with no lag */}
       <div
         ref={dotRef}
         style={{
@@ -121,7 +131,7 @@ export default function CustomCursor() {
         }}
         aria-hidden="true"
       />
-      {/* 40px follower — lerp 0.08, expands to 80px on hoverable targets */}
+      {/* 40px follower — lags with lerp 0.08, expands on hover */}
       <div
         ref={followerRef}
         style={{
