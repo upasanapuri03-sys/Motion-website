@@ -109,6 +109,7 @@ export default function Hero() {
       {/* ── Placeholder box — swap for <img> when photos are ready ─────── */}
       <div
         ref={modelRef}
+        data-hero-model
         className="absolute bottom-0 right-0 h-[70vh] w-[min(30vw,420px)] hidden md:flex flex-col items-center justify-end pb-10"
         style={{ opacity: 0, backgroundColor: PLACEHOLDERS[0].bg }}
         aria-hidden="true"
