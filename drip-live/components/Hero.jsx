@@ -1,36 +1,32 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 
-const MODEL_PATHS = [
-  '/models/model1.png',
-  '/models/model2.png',
-  '/models/model3.png',
-  '/models/model4.png',
-  '/models/model5.png',
+// Swap these for MODEL_PATHS + <img> once real photos are ready
+const PLACEHOLDERS = [
+  { bg: '#7BA69A', label: 'LOOK 01' }, // mint sage   → model1
+  { bg: '#6B1F2A', label: 'LOOK 02' }, // burgundy    → model2
+  { bg: '#5C3A1E', label: 'LOOK 03' }, // warm brown  → model3
+  { bg: '#C9A84C', label: 'LOOK 04' }, // golden      → model4
+  { bg: '#6B8C3E', label: 'LOOK 05' }, // olive green → model5
 ]
 
 export default function Hero() {
-  const modelRef    = useRef(null)
-  const headingRef  = useRef(null)
-  const subRef      = useRef(null)
-  const lineRef     = useRef(null)
-  const idxRef      = useRef(0)
+  const modelRef   = useRef(null)
+  const labelRef   = useRef(null)
+  const headingRef = useRef(null)
+  const subRef     = useRef(null)
+  const lineRef    = useRef(null)
+  const idxRef     = useRef(0)
 
   useEffect(() => {
     const model   = modelRef.current
+    const label   = labelRef.current
     const heading = headingRef.current
     const sub     = subRef.current
     const line    = lineRef.current
-    if (!model || !heading || !sub || !line) return
-
-    // Preload images 2–5 so swaps are instant
-    MODEL_PATHS.slice(1).forEach((src) => {
-      const img = new Image()
-      img.src = src
-    })
+    if (!model || !label || !heading || !sub || !line) return
 
     // ── 1. MODEL WALK-IN ─────────────────────────────────────────────────
     gsap.fromTo(
@@ -55,14 +51,15 @@ export default function Hero() {
 
     // ── 3. OUTFIT CYCLING (every 3 s) ─────────────────────────────────────
     const cycleInterval = setInterval(() => {
-      const next = (idxRef.current + 1) % MODEL_PATHS.length
+      const next = (idxRef.current + 1) % PLACEHOLDERS.length
 
       gsap.to(model, {
         opacity: 0,
         duration: 0.4,
         ease: 'power2.in',
         onComplete: () => {
-          model.src = MODEL_PATHS[next]
+          model.style.backgroundColor = PLACEHOLDERS[next].bg
+          label.textContent = PLACEHOLDERS[next].label
           idxRef.current = next
           gsap.to(model, { opacity: 1, duration: 0.4, ease: 'power2.out' })
         },
@@ -71,8 +68,8 @@ export default function Hero() {
 
     // ── 4. GLITCH on "NO RULES." (every 4 s, lasts 300 ms) ───────────────
     const runGlitch = () => {
-      const STEPS    = 8
-      const STEP_MS  = 300 / STEPS
+      const STEPS   = 8
+      const STEP_MS = 300 / STEPS
       let count = 0
 
       const tick = setInterval(() => {
@@ -85,8 +82,7 @@ export default function Hero() {
         const dy = (Math.random() * 4 - 2).toFixed(1)
         const a  = count % 2 === 0 ? '#FF1E1E' : '#C8FF00'
         const b  = count % 2 === 0 ? '#C8FF00' : '#FF1E1E'
-        sub.style.textShadow =
-          `${dx}px ${dy}px 0 ${a}, ${-dx}px ${-dy}px 0 ${b}`
+        sub.style.textShadow = `${dx}px ${dy}px 0 ${a}, ${-dx}px ${-dy}px 0 ${b}`
         count++
       }, STEP_MS)
     }
@@ -97,13 +93,7 @@ export default function Hero() {
     gsap.fromTo(
       line,
       { scaleY: 0, transformOrigin: 'top center' },
-      {
-        scaleY: 1,
-        duration: 0.9,
-        ease: 'power2.inOut',
-        repeat: -1,
-        yoyo: true,
-      }
+      { scaleY: 1, duration: 0.9, ease: 'power2.inOut', repeat: -1, yoyo: true }
     )
 
     return () => {
@@ -116,35 +106,35 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen bg-[#0a0a0a] overflow-hidden">
 
-      {/* ── Model — hidden below md ─────────────────────────────────────── */}
-      <img
+      {/* ── Placeholder box — swap for <img> when photos are ready ─────── */}
+      <div
         ref={modelRef}
-        src={MODEL_PATHS[0]}
-        alt=""
+        className="absolute bottom-0 right-0 h-[70vh] w-[min(30vw,420px)] hidden md:flex flex-col items-center justify-end pb-10"
+        style={{ opacity: 0, backgroundColor: PLACEHOLDERS[0].bg }}
         aria-hidden="true"
-        className="absolute bottom-0 right-0 h-[70vh] w-auto object-contain object-bottom hidden md:block"
-        style={{ opacity: 0 }}
-      />
+      >
+        <span
+          ref={labelRef}
+          className="font-mono text-white/70 tracking-widest"
+          style={{ fontSize: 11, letterSpacing: '4px' }}
+        >
+          {PLACEHOLDERS[0].label}
+        </span>
+      </div>
 
       {/* ── Text block ──────────────────────────────────────────────────── */}
       <div className="absolute left-[6vw] top-1/2 -translate-y-1/2 flex flex-col leading-none">
         <h1
           ref={headingRef}
           className="font-heading text-white leading-[0.9]"
-          style={{
-            fontSize: 'clamp(64px, 18vw, 320px)',
-            opacity: 0,
-          }}
+          style={{ fontSize: 'clamp(64px, 18vw, 320px)', opacity: 0 }}
         >
           SS26
         </h1>
         <h2
           ref={subRef}
           className="font-heading text-[#C8FF00] leading-[0.9]"
-          style={{
-            fontSize: 'clamp(28px, 8vw, 140px)',
-            opacity: 0,
-          }}
+          style={{ fontSize: 'clamp(28px, 8vw, 140px)', opacity: 0 }}
         >
           NO RULES.
         </h2>
